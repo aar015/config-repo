@@ -1,0 +1,499 @@
+exit
+exit
+exit
+\
+exit
+vim ~/.bash_profile
+vim .profile
+vim .vimrc
+exit
+zsh
+echo $SHELL
+zsh
+zsh
+ls
+cd ~
+ls
+vim ~.bash_profile
+zsh
+vim ~/.vimrc
+exit
+vim ~/.vimrc
+exit
+vim .vimrc
+cd .config/nvim/autoload
+vim plug.vim
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+exit
+vifmcd
+vifmcd
+vifmcd
+exit
+vifmcd
+eixt
+exit
+vifmcd
+exit
+vifmcd
+vifmcd
+cd
+exit
+cd ..
+cd
+exit
+zsh
+zsh
+zsh
+zsh
+zsh
+cd .config/
+ls
+exit
+zsh
+zsh
+zsh
+exit
+zsh
+exit
+zsh
+exit
+zsh
+zsh
+zsh
+zsh
+zsh
+zsh
+zsh
+zsh
+echo $SHELL
+exit
+zsh
+killall st
+zsh
+echo $SHELL
+zsh
+ls
+ls -a
+vim .xinitrc
+vim .vimrc
+exit
+echo $SHELL
+vim .vimrc
+nvim .vimrc
+ls
+ls -a
+nvim .bash_profile
+nvim .config/zsh/.zshrc
+exit
+cd
+cd
+cd .config
+cd
+cd
+cd ~/.config
+cd ~/.config
+clear
+exit
+cd /bin/zsh
+cd /bin
+ls
+cd zsh
+vim zsh
+/bin/zsh/cd
+zsh cd
+exit
+cd
+cd h
+cd ~
+vifm --help
+exit
+exit
+exit
+nv
+nv
+nv
+nv
+vifm
+vifm --help
+vifm --choose-files -
+exit
+cd
+exit
+cd
+cd
+cd
+vifm --help
+exit
+cd
+cd
+nv
+cd ~/.config/calcurse
+ls
+cd
+cd ~
+cd
+cd ~
+ls
+nv
+nv
+sudo nv
+sudo nv
+sudo cd
+exit
+vifmcd
+cd
+ls
+nvim .bashrc
+nvim .profile
+nvim .config/zsh/.zshrc
+sudo nv
+nv
+sudo nvim .vimrc
+sudo nv
+sudo nvim .vimrc
+exit
+sudo nv
+nv .xprofile
+nv .xinitrc
+ls
+ls -a
+nvim .xinitrc
+nv .xinitrc
+nvim .xinitrc
+nv .xinitrc
+nv .xinitrc
+nv .xprofile
+exit
+sudo nv
+sudo nvim .vimrc
+sudo nv .vimrc
+nv
+nv .config/zsh/.zshrc
+nv .config/zsh/.zshrc
+cd .config/zsh/
+ls
+ls -a
+vim .zshrc
+nvim .zshrc
+exit
+startx
+startx
+logout
+qqq
+sudo nv
+sudo nv
+sudo nv
+sudo nv
+sudo nv
+sudo l
+sudo l
+exit
+sudo nv
+sudo-nv
+sudo-nv
+sudo-nv
+nv
+vifm
+calcurse
+bc
+arandr
+arandr
+xorg-xwininfo
+ed
+xwallpaper
+mpc
+cd ~/.local/share/nvim/swap
+ls
+rm %home%arevah%Downloads%progs.csv.swp
+w3m
+w3m www.google.com
+w3m www.google.com
+exit
+ls -a
+vim .config
+cd .config
+ls
+rmdir i3blocks
+rm i3blocks
+rm i3blocks/*
+rmdir i3blocks
+ls
+cd vifm
+ls
+cd colors
+ls
+nvim luke.vifm
+cd ..
+ls
+nv vifmrc
+cd
+nv
+nv
+nv
+nv
+cd
+cd ..
+ls
+nv
+ls
+ls -a
+nv
+sc-im Downloads/progs.csv
+nv
+nv
+nv
+exit
+startx
+poweroff
+ls
+ls -a
+mkdir .suckless
+cd Downloads
+ls
+mkdir ~/.suckless/dwm
+mkdir ~/.suckless/st
+mv dwm/* ~/.suckless/dwm
+mv st/* ~/.suckless/st
+ls
+cd dwm
+cd ..
+rmdir dwm st
+rmdir dwm
+cd dwm
+ls -a
+rm .git
+rm .git/*
+rmdir .git
+cd .git
+ls
+rmdir *
+cd ..
+ls
+nv .gitignore
+ls
+cd ..
+ls
+rm -h
+man rm
+rm -r dwm
+ls
+rm -r st
+ls
+cd ~/.suckless
+ls
+cd dwm
+ls
+cd ..
+ls
+cd st
+ls
+nv config.h
+cd ~
+ls
+ls -a
+cd .git
+ls
+cd ..
+ls
+cd .icons
+ls
+cd default
+ls
+cd ..
+cd ..
+cd w3m
+ls
+cd .w3m
+ls
+cd ..
+ls
+cd .vim
+ls
+ls -a
+cd ..
+ls
+nvim .vimrc \
+nvim .vimrc
+nv .xprofile
+ls -a
+vim .xprofile
+nv .xprofile
+cd .config
+ls
+cd
+ls
+nv sxhkdrc
+exit
+webby
+man webby
+webby | xargs -r $BROWSER
+exit
+ls
+nv
+exit
+exit
+nv
+exit
+nv
+nv
+nv
+ls
+groff pic-full-191005-1604-44.png
+vifm
+rm pic-full-191005-1604-44.png
+ls
+nv
+ls
+ls -a
+ls -la ~ | grep "\->"
+find . -maxdepth 1 -type l -ls
+find . -type l =ls
+find . -type l -ls
+man firefox
+firefox -h
+firefox --ProfileManager
+find . -type l -ls
+cd ./.mozilla/firefox
+ls
+cd larbs.default
+ls
+cd ..
+ls
+vifm
+vifm
+cd
+ls
+ls -a
+find . -type l -ls
+nv .bash_profile
+exit
+maim -h
+man maim
+man lmc
+lmc -h
+cd ~/.local/bin/tools
+ls
+nv remaps
+echo $LESS_TERMCAP_mb
+echo $LESS_TERMCAP_mb
+echo $PATH
+echo $LESS
+$LESS_TERMCAP_mb
+cat $LESS_TERMCAP_mb
+echo "$LESS_TERMCAP_mb"
+echo  $(LESS_TERMCAP_mb)
+echo  "$(LESS_TERMCAP_mb)"
+pgrep -h
+!
+cd /dev/null
+cd /dev
+ls
+echo "$(! pgrep -x dwm > /dev/null)"
+echo "$(/dev/null)"
+sudo echo "$(! pgrep -x dwm > /dev/null)"
+sudo echo "$(/dev/null)"
+cat /dev/null
+pgrep -x dwm
+! pgrep -x dwm
+pgrep -h
+pgrep -lx dwm
+pgrep -cx dwm
+pgrep dskf
+pgrep a
+pgrep -x adkf
+! pgrep -x adkf
+! pgrep -x dwm
+grep -r power /sys/
+pgrep a
+pgrep *
+pgrep --help
+pgrep -l
+pgrep -x dwm
+pgrep -x dwm > echo
+cd ..
+ls
+cd ~
+ls
+pgrep -x dwm
+pgrep -x dwm > echo
+pgrep -x dwm > cat
+pgrep -x dwm | echo
+cd ~/.local/bin/
+ls
+nvim ttymaps.kmap
+echo $0
+grep bash$
+cd ~
+grep bash$
+grep bash
+echo $0 | grep bash$
+echo $0 | grep bash$ >/dev/null
+"echo $0" | "grep bash$"
+echo "$0" | grep "bash$"
+echo $0 | grep "bash$"
+echo $0 | grep
+grep -h
+grep --help
+man grep
+echo $0 | grep zsh
+[ -f ]
+exit
+ls
+rm echo
+rm cat
+ls
+ls -a
+vim .profile
+nv .profile
+exit
+exit
+ls
+mkdir .config-reop
+ls
+ls -a
+rmdir .config-reop
+mkdir .config-repo
+ls .config
+cd ..
+ls
+cd arevah
+ls
+ls -a
+git init --bare $HOME/.config-repo
+nv .config/zsh/.zshrc
+exit
+nv /etc/inputrc
