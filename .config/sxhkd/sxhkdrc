@@ -1,0 +1,35 @@
+# Alt Bindings
+alt + Return
+	$TERMINAL
+alt + a
+	dmenu_run
+alt + s
+	$BROWSER
+alt + f
+	$TERMINAL -e $FILE
+
+# Super Bindings
+super + i
+	$TERMINAL -e gotop
+super + a
+	$TERMINAL -e pulsemixer
+super + Insert
+	showclip
+super + x
+	prompt "Shutdown computer?" "sudo -A shutdown -h now"
+super + r
+	prompt "Reboot computer?" "sudo -A shutdown -r now"
+super + h
+	prompt 'Hibernate computer?' 'sudo systemctl suspend'
+super + s
+	ducksearch
+XF86Launch1
+	xset dpms force off
+
+# Function keys
+# F2 is restart in dwm right now.
+# Restart/rescan wifi/eth networks
+super + F5
+	sudo -A systemctl restart NetworkManager
+
+

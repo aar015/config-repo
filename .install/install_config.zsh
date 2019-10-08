@@ -1,32 +1,20 @@
 #!/bin/zsh
 
-# Add suckless remote depositories to suckless programs
-for file in $HOME/.suckless/*(/); do
-	base=`basename $file`
-	git --git-dir=$HOME/.config-repo/modules/.suckless/$base/ --work-tree=$file/ remote add suckless https://git.suckless.org/$base;
-done
-
 while getopts ":a:r:b:p:h" o; do case "${o}" in
-	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -b: Dotfiles branch (master is assumed otherwise)\\n  -p: Dependencies and programs csv (local file or url)\\n  -a: AUR helper (must have pacman-like syntax)\\n  -h: Show this message\\n" && exit ;;
-	r) dotfilesrepo=${OPTARG} && git ls-remote "$dotfilesrepo" || exit ;;
-	b) repobranch=${OPTARG} ;;
-	p) progsfile=${OPTARG} ;;
+	h) printf "Optional arguments for custom use:\\n -a: AUR helper (must have pacman-like syntax)\\n  -h: Show this message\\n" && exit ;;
 	a) aurhelper=${OPTARG} ;;
 	*) printf "Invalid option: -%s\\n" "$OPTARG" && exit ;;
 esac done
 
 # DEFAULTS:
-[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/aar015/config-repo.git" && repobranch="archi3"
-[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/archi3/progs.csv"
 [ -z "$aurhelper" ] && aurhelper="yay"
-[ -z "$repobranch" ] && repobranch="master"
 
 ### FUNCTIONS ###
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
 welcomemsg() { \
-	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
+	dialog --title "Welcome!" --msgbox "Welcome to Avi's Auto-Rice Bootstrapping Script (Based on Luke's Auto-Rice Bootstrapping Script)!\\n\\nThis script will automatically install a fully-featured dwm Arch Linux desktop, which I use as my main machine." 10 60
 	}
 
 getuserandpass() { \
@@ -45,20 +33,12 @@ getuserandpass() { \
 
 usercheck() { \
 	! (id -u "$name" >/dev/null) 2>&1 ||
-	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "The user \`$name\` already exists on this system. LARBS can install for a user already existing, but it will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten.\\n\\nNote also that LARBS will change $name's password to the one you just gave." 14 70
+	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "LARBS will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten." 14 70
 	}
 
 preinstallmsg() { \
 	dialog --title "Let's get this party started!" --yes-label "Let's go!" --no-label "No, nevermind!" --yesno "The rest of the installation will now be totally automated, so you can sit back and relax.\\n\\nIt will take some time, but when done, you can relax even more with your complete system.\\n\\nNow just press <Let's go!> and the system will begin installation!" 13 60 || { clear; exit; }
 	}
-
-adduserandpass() { \
-	# Adds user `$name` with password $pass1.
-	dialog --infobox "Adding user \"$name\"..." 4 50
-	useradd -m -g wheel -s /bin/bash "$name" >/dev/null 2>&1 ||
-	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
-	echo "$name:$pass1" | chpasswd
-	unset pass1 pass2 ;}
 
 refreshkeys() { \
 	dialog --infobox "Refreshing Arch Keyring..." 4 40
@@ -85,15 +65,6 @@ maininstall() { # Installs all needed programs from main repo.
 	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
 	}
 
-gitmakeinstall() {
-	dir=$(mktemp -d)
-	dialog --title "LARBS Installation" --infobox "Installing \`$(basename "$1")\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	git clone --depth 1 "$1" "$dir" >/dev/null 2>&1
-	cd "$dir" || exit
-	make >/dev/null 2>&1
-	make install >/dev/null 2>&1
-	cd /tmp || return ;}
-
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
 	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
@@ -119,16 +90,18 @@ installationloop() { \
 			"G") gitmakeinstall "$program" "$comment" ;;
 			"P") pipinstall "$program" "$comment" ;;
 		esac
-	done < /tmp/progs.csv ;}
+	done < /tmp/progs.csv ;
+	}
 
-putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriting conflicts
-	dialog --infobox "Downloading and installing config files..." 4 60
-	[ -z "$3" ] && branch="master" || branch="$repobranch"
-	dir=$(mktemp -d)
-	[ ! -d "$2" ] && mkdir -p "$2" && chown -R "$name:wheel" "$2"
-	chown -R "$name:wheel" "$dir"
-	sudo -u "$name" git clone -b "$branch" --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1 &&
-	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
+installsubmodules(){\
+	# Initialize submodules
+	git --git-dir=$HOME/.config-repo/ --work-tree=$HOME/ submodule update --init --recursive
+	# Add upstream depositories and install suckless programs
+	for dir in $HOME/.suckless/*(/); do
+		base=`basename $dir`
+		git --git-dir=$HOME/.config-repo/modules/.suckless/$dir/ --work-tree=$dir/ remote add suckless https://git.suckless.org/$base;
+		sudo make -C $dir clean install
+	done
 	}
 
 serviceinit() { for service in "$@"; do
@@ -148,7 +121,7 @@ resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
 	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
-	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 12 80
+	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1)." 12 80
 	}
 
 ### THE ACTUAL SCRIPT ###
@@ -164,7 +137,7 @@ welcomemsg || error "User exited."
 # Get and verify username and password.
 getuserandpass || error "User exited."
 
-# Give warning if user already exists.
+# Give warning about overriding config
 usercheck || error "User exited."
 
 # Last chance for user to back out before install.
@@ -172,14 +145,8 @@ preinstallmsg || error "User exited."
 
 ### The rest of the script requires no user input.
 
-adduserandpass || error "Error adding username and/or password."
-
 # Refresh Arch keyrings.
 refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
-
-dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
-pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
-[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
 # Allow user to run sudo without password. Since AUR programs must be installed
 # in a fakeroot environment, this is required for all builds with AUR.
@@ -192,6 +159,7 @@ grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILo
 # Use all cores for compilation.
 sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
 
+# Install the aur helper
 manualinstall $aurhelper || error "Failed to install AUR helper."
 
 # The command that does all the installing. Reads the progs.csv file and
@@ -200,9 +168,8 @@ manualinstall $aurhelper || error "Failed to install AUR helper."
 # and all build dependencies are installed.
 installationloop
 
-# Install the dotfiles in the user's home directory
-putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
-rm -f "/home/$name/README.md" "/home/$name/LICENSE"
+# Initializes and installs submodules
+installsubmodules
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse
@@ -212,11 +179,6 @@ serviceinit NetworkManager cronie
 
 # Most important command! Get rid of the beep!
 systembeepoff
-
-# This line, overwriting the `newperms` command above will allow the user to run
-# serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-newperms "%wheel ALL=(ALL) ALL #LARBS
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
 # Last message! Install complete!
 finalize
