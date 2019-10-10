@@ -75,12 +75,12 @@ installsubmodules(){\
 	dialog --infobox "Installing submodules ..." 4 40
 	USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 	# Initialize submodules
-	git --git-dir=$USER_HOME/.config-repo/ --work-tree=$USER_HOME/ submodule update --init --recursive
+	git --git-dir=$USER_HOME/.config-repo/ --work-tree=$USER_HOME/ submodule update --init --recursive >/dev/null 2>&1
 	# Add upstream depositories and install suckless programs
 	for dir in $USER_HOME/.suckless/*(/); do
 		base=`basename $dir`
-		git --git-dir=$USER_HOME/.config-repo/modules/.suckless/$dir/ --work-tree=$dir/ remote add suckless https://git.suckless.org/$base;
-		sudo make -C $dir clean install
+		git --git-dir=$USER_HOME/.config-repo/modules/.suckless/$dir/ --work-tree=$dir/ remote add suckless https://git.suckless.org/$base >/dev/null 2>&1
+		sudo make -C $dir clean install 2>&1
 	done
 	}
 
@@ -111,9 +111,6 @@ pacman -Syu --noconfirm --needed dialog ||  error "Are you sure you're running t
 
 # Welcome user.
 welcomemsg || error "User exited."
-
-# Last chance for user to back out before install.
-preinstallmsg || error "User exited."
 
 ### The rest of the script requires no user input.
 
