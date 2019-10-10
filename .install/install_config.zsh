@@ -14,30 +14,7 @@ esac done
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
 welcomemsg() { \
-	dialog --title "Welcome!" --msgbox "Welcome to Avi's Auto-Rice Bootstrapping Script (Based on Luke's Auto-Rice Bootstrapping Script)!\\n\\nThis script will automatically install a fully-featured dwm Arch Linux desktop, which I use as my main machine." 10 60
-	}
-
-getuserandpass() { \
-	# Prompts user for new username an password.
-	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
-	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$" >/dev/null 2>&1; do
-		name=$(dialog --no-cancel --inputbox "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _." 10 60 3>&1 1>&2 2>&3 3>&1)
-	done
-	pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
-	pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
-	while ! [ "$pass1" = "$pass2" ]; do
-		unset pass2
-		pass1=$(dialog --no-cancel --passwordbox "Passwords do not match.\\n\\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
-		pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
-	done ;}
-
-usercheck() { \
-	! (id -u "$name" >/dev/null) 2>&1 ||
-	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "LARBS will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten." 14 70
-	}
-
-preinstallmsg() { \
-	dialog --title "Let's get this party started!" --yes-label "Let's go!" --no-label "No, nevermind!" --yesno "The rest of the installation will now be totally automated, so you can sit back and relax.\\n\\nIt will take some time, but when done, you can relax even more with your complete system.\\n\\nNow just press <Let's go!> and the system will begin installation!" 13 60 || { clear; exit; }
+	dialog --title "Welcome" --yes-label "Let's go!" --no-label "No, nevermind!" --yesno "Welcome to Avi's Auto-Configuration Script (Based on Luke's Auto-Rice Bootstrapping Script)!\\n\\nThis script will automatically install a fully-featured dwm Arch Linux desktop, which I use as my main machine.\\n\\n The installation will be totally automated, but will override your other configuration settings." 13 60 || { clear; exit; }
 	}
 
 refreshkeys() { \
@@ -46,6 +23,7 @@ refreshkeys() { \
 	}
 
 newperms() { # Set special sudoers settings for install (or after).
+	dialog --infobox "Resetting Sudo Permissions" 4 10
 	sed -i "/#LARBS/d" /etc/sudoers
 	echo "$* #LARBS" >> /etc/sudoers ;}
 
@@ -94,12 +72,14 @@ installationloop() { \
 	}
 
 installsubmodules(){\
+	dialog --infobox "Installing submodules ..." 4 40
+	USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 	# Initialize submodules
-	git --git-dir=$HOME/.config-repo/ --work-tree=$HOME/ submodule update --init --recursive
+	git --git-dir=$USER_HOME/.config-repo/ --work-tree=$USER_HOME/ submodule update --init --recursive
 	# Add upstream depositories and install suckless programs
-	for dir in $HOME/.suckless/*(/); do
+	for dir in $USER_HOME/.suckless/*(/); do
 		base=`basename $dir`
-		git --git-dir=$HOME/.config-repo/modules/.suckless/$dir/ --work-tree=$dir/ remote add suckless https://git.suckless.org/$base;
+		git --git-dir=$USER_HOME/.config-repo/modules/.suckless/$dir/ --work-tree=$dir/ remote add suckless https://git.suckless.org/$base;
 		sudo make -C $dir clean install
 	done
 	}
@@ -119,8 +99,6 @@ resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
 	sudo -n "$name" pulseaudio --start ;}
 
 finalize(){ \
-	dialog --infobox "Preparing welcome message..." 4 50
-	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
 	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1)." 12 80
 	}
 
@@ -133,12 +111,6 @@ pacman -Syu --noconfirm --needed dialog ||  error "Are you sure you're running t
 
 # Welcome user.
 welcomemsg || error "User exited."
-
-# Get and verify username and password.
-getuserandpass || error "User exited."
-
-# Give warning about overriding config
-usercheck || error "User exited."
 
 # Last chance for user to back out before install.
 preinstallmsg || error "User exited."
@@ -175,7 +147,7 @@ installsubmodules
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
 # Enable services here.
-serviceinit NetworkManager cronie
+serviceinit NetworkManager
 
 # Most important command! Get rid of the beep!
 systembeepoff
