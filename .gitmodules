@@ -1,9 +1,0 @@
-[submodule ".suckless/dmenu"]
-	path = .suckless/dmenu
-	url = https://github.com/aar015/dmenu.git
-[submodule ".suckless/dwm"]
-	path = .suckless/dwm
-	url = https://github.com/aar015/dwm.git
-[submodule ".suckless/st"]
-	path = .suckless/st
-	url = https://github.com/aar015/st.git

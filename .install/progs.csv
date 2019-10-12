@@ -1,38 +1,29 @@
 # TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
-# Graphics drivers
 ,xorg-server,is the graphical server.
 ,xorg-xinit,starts the graphical server.
 ,xcompmgr,is for transparency and removing screen-tearing.
 ,nvidia,
 ,nvidia-libgl,
 ,mesa,
-# Audio drivers
 ,pulseaudio,is the audio system (>inb4 bloat).
 ,pulseaudio-alsa,is an audio interface with ALSA.
 ,pulseaudio-bluetooth,Bluetooth support
 ,pulsemixer,is an intuitive ncurses audio controller.
-# Shell
 ,zsh,ZSH shell
 ,zsh-syntax-highlighting,Syntax Hightlighting for zsh
-# File manager
 ,vifm,is an extensive terminal file manager that everyone likes.
 ,tree,lists directory contents like trees. Used by vifm.
-# Internet Services
 ,networkmanager,does exactly what it sounds like.
 A,nordvpn-bin,vpn service
-A,brave,web browser
-# Window manager
+A,brave-bin,web browser
 ,sxhkd,binds key.
 ,libnotify,allows desktop notifications.
 ,dunst,is a suckless notification system.
 ,unclutter,hides an inactive mouse.
 ,xwallpaper,sets the wallpaper.
-# System diagnostics
 A,gotop,better looking system diagnostics
-# File editing
 ,neovim,a tidier vim with some useful features
 ,zathura,is a pdf viewer with vim-like bindings.
 ,sxiv,is a minimalist image viewer.
-# Programs I am unsure about
 ,fzf,is a fuzzy finder tool.
 ,gnome-keyring,serves as the system keyring.
