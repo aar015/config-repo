@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
 
-exec dwm
+exec startdwm

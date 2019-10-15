@@ -1,10 +1,13 @@
 # TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
 ,xorg-server,is the graphical server.
 ,xorg-xinit,starts the graphical server.
+,xorg-xrandr,sets up screens
+,xorg-xrdb,sets color scheme
+,xorg-xsetroot,sets the statusbar
 ,xcompmgr,is for transparency and removing screen-tearing.
-,nvidia,
-,nvidia-libgl,
-,mesa,
+,nvidia,is the graphics driver
+,nvidia-libgl,is more graphics drivers
+,mesa,is more graphics drivers
 ,pulseaudio,is the audio system (>inb4 bloat).
 ,pulseaudio-alsa,is an audio interface with ALSA.
 ,pulseaudio-bluetooth,Bluetooth support
@@ -15,6 +18,10 @@
 ,tree,lists directory contents like trees. Used by vifm.
 ,networkmanager,does exactly what it sounds like.
 A,nordvpn-bin,vpn service
+,wireguard-tools,is for vpn
+,wireguard-arch,is for vpn
+,transmission-cli,
+A,transmission-remote-cli-git,
 A,brave-bin,web browser
 ,sxhkd,binds key.
 ,libnotify,allows desktop notifications.

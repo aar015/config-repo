@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+# Sets the statusbar
+# while true; do
+xsetroot -name " $(date +"%a %b %d | %I:%M %p") "
+# sleep 1m
+# done

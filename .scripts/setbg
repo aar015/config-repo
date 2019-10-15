@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+# Sets the background
+xwallpaper --output DP-3 --trim 1920x1080+0+0 --maximize $1 --output HDMI-0 --trim 1920x1080+1920+0 --maximize $1

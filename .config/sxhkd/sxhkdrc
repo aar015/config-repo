@@ -1,8 +1,6 @@
 # Alt Bindings
 alt + Return
 	$TERMINAL
-alt + a
-	dmenu_run
 alt + s
 	$BROWSER
 alt + f

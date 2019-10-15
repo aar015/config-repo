@@ -1,0 +1,57 @@
+! Color Definitions
+#define bg		#181b20
+#define fg		#9b9081
+#define black0 		#353535
+#define black1		#5f5f5f
+#define red0		#744b40
+#define red1		#785850
+#define green0 		#6d6137
+#define green1 		#6f6749
+#define yellow0 	#765636
+#define yellow1 	#776049
+#define blue0		#61564b
+#define blue1		#696057
+#define magenta0 	#6b4a49
+#define magenta1 	#6f5a59
+#define cyan0		#435861
+#define cyan1		#525f66
+#define white0		#b3b3b3
+#define white1		#cdcdcd
+
+! special
+*.foreground:   	fg
+*.background:   	bg
+*.cursorColor:  	fg
+
+! Base 16
+*.color0:       	black0
+*.color1:       	red0
+*.color2:       	green0
+*.color3:       	yellow0
+*.color4:       	blue0
+*.color5:       	magenta0
+*.color6:       	cyan0
+*.color7:       	white0
+*.color8:       	black1
+*.color9:       	red1
+*.color10:      	green1
+*.color11:      	yellow1
+*.color12:      	blue1
+*.color13:      	magenta1
+*.color14:      	cyan1
+*.color15:      	white1
+
+! DWM Settings
+dwm.normbordercolor:	black1
+dwm.normbgcolor:	bg
+dwm.normfgcolor:	fg
+dwm.selbordercolor:	magenta0
+dwm.selbgcolor:		bg
+dwm.selfgcolor:		blue1
+
+! ST settings
+st.alpha:		0.95
+st.tabspaces:		4
+st.borderpx:		0
+st.cwscale:		1.0
+st.chscale:		1.0

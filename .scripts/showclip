@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 # Display contents of selection via dunst if running.
 # Separate script for i3.

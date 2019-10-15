@@ -1,8 +1,7 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 # Profile file. Runs on login.
 
-# Adds `~/.local/bin/` and all subdirectories to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+export PATH=$PATH:$HOME/.scripts
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="brave"

@@ -166,7 +166,7 @@ installationloop || error "Failed to install all programs"
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
 # Enable services here.
-serviceinit NetworkManager
+serviceinit NetworkManager nordvpnd
 
 # Most important command! Get rid of the beep!
 systembeepoff
