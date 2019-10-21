@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # Profile file. Runs on login.
 
-export PATH=$PATH:$HOME/.scripts
+export PATH=$PATH:$HOME/.scripts:/opt/cuda/bin
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="brave"

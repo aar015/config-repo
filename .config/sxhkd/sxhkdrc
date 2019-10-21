@@ -18,8 +18,10 @@ super + x
 super + r
 	prompt "Reboot computer?" "sudo -A shutdown -r now"
 super + h
-	prompt 'Hibernate computer?' 'sudo systemctl suspend'
+	prompt 'Hibernate computer?' 'sudo systemctl hibernate'
 super + s
+	prompt 'Suspend computer?' 'sudo systemctl suspend'
+super + f
 	ducksearch
 XF86Launch1
 	xset dpms force off

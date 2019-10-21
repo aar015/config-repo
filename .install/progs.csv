@@ -12,6 +12,8 @@
 ,pulseaudio-alsa,is an audio interface with ALSA.
 ,pulseaudio-bluetooth,Bluetooth support
 ,pulsemixer,is an intuitive ncurses audio controller.
+,bluez,is for bluethooth
+,bluez-utils,is also for bluetooth
 ,zsh,ZSH shell
 ,zsh-syntax-highlighting,Syntax Hightlighting for zsh
 ,vifm,is an extensive terminal file manager that everyone likes.
@@ -20,17 +22,20 @@
 A,nordvpn-bin,vpn service
 ,wireguard-tools,is for vpn
 ,wireguard-arch,is for vpn
-,transmission-cli,
-A,transmission-remote-cli-git,
-A,brave-bin,web browser
+,transmission-cli,is for torrents
+A,transmission-remote-cli-git,is terminal interface for transmission
+A,brave-bin,is a web browser
 ,sxhkd,binds key.
 ,libnotify,allows desktop notifications.
 ,dunst,is a suckless notification system.
 ,unclutter,hides an inactive mouse.
 ,xwallpaper,sets the wallpaper.
-A,gotop,better looking system diagnostics
+A,gotop,is for better looking system diagnostics
+,sysstat,gets system statistics for status bar
 ,neovim,a tidier vim with some useful features
 ,zathura,is a pdf viewer with vim-like bindings.
+,zathura-pdf-mupdf,is the part of zathura that actually reads pdfs
 ,sxiv,is a minimalist image viewer.
+,mpv,is a video player
 ,fzf,is a fuzzy finder tool.
 ,gnome-keyring,serves as the system keyring.

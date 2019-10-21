@@ -1,6 +1,75 @@
 #!/usr/bin/env zsh
 # Sets the statusbar
-# while true; do
-xsetroot -name " $(date +"%a %b %d | %I:%M %p") "
-# sleep 1m
-# done
+
+function bottom_header()
+{
+	if [[ $bottombar != " " ]]; then
+		bottombar="${bottombar}            "
+	fi
+	bottombar="${bottombar}[$1] "
+	first=1
+}
+
+function bottom_info()
+{
+	if [[ $first = 0 ]]; then
+		bottombar="${bottombar} "
+	fi
+	first=0
+	bottombar="${bottombar}$1"
+	if [[ $# == 2 ]]; then
+		bottombar="${bottombar}:$2"
+	fi
+}
+
+while true; do
+	# Zero out bars
+	topbar=" "
+	bottombar=" "
+	first=1
+
+	# Construct Top Bar
+	# Date and Time
+	topbar="$topbar`date -u +"%a %b %d | %I:%M %p"` "
+
+	# Construct Bottom Bar
+	# WIFI
+	bottom_header "WIFI"
+	bottom_info `nmcli device | awk '/^wlp6s0/{print $4}'`
+	# VPN
+	bottom_header "VPN"
+	connection="`nordvpn status | awk '/^Status/{print $2}'`"
+	bottom_info $connection
+	if [[ $connection = "Connected" ]]; then
+		bottom_info `nordvpn status | awk '/^Country/{print $2 "_" $3}'` `nordvpn status | awk '/^City/{print $2$3}'`
+		bottom_info "IP" `nordvpn status | awk '/^Your/{print $4}'`
+	fi
+	# Bluetooth
+	connected="`bluetoothctl info EB:06:EF:7D:A1:C1 | awk '/Connected/{print $2}'`"
+	if [[ $connected = "yes" ]]; then
+		bottom_header "BLT"
+		bottom_info "Mpow H10"
+	fi
+	# CPU
+	bottom_header "CPU"
+	cpu_temp="`sensors | awk '/^Package id 0:/ {print $4}'`"
+	bottom_info "TEMP" "${cpu_temp:1:2}${cpu_temp:5}"
+	bottom_info "UTIL" "`mpstat | awk '/^.*all/{print 100 - $13}'`%"
+	# GPU
+	bottom_header "GPU"
+	bottom_info "TEMP" "`nvidia-smi --query-gpu="temperature.gpu" --format=csv,noheader,nounits`C"
+	bottom_info "UTIL" "`nvidia-smi --query-gpu="utilization.gpu" --format=csv,noheader,nounits`%"
+	# MEM
+	bottom_header MEM
+	bottom_info "`free -h | awk '/^Mem:/ {print $3 "/" $2}'`"
+	# Add padding to string
+	((num_char = ( 212 - $#bottombar ) / 2 ))
+	for ((i=0; i<num_char; i++)); do
+		bottombar=" $bottombar";
+	done
+
+	# Send bars to x root
+	xsetroot -name "$topbar;$bottombar"
+	# Sleep
+	sleep 5s
+done

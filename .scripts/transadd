@@ -2,6 +2,6 @@
 
 # Mimeapp script for adding torrent to transmission-daemon, but will also start the daemon first if not running
 
- pgrep -x transmission-da >/dev/null || (sudo systemctl start transmission.service && notify-send "Starting transmission daemon..." && sleep 3
+pgrep -x transmission-da >/dev/null || (sudo systemctl start transmission.service && notify-send "Starting transmission daemon..." && sleep 3)
 
  transmission-remote -a "$@" && notify-send "Transmission Daemon" "Torrent added."
